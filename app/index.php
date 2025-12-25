@@ -1,5 +1,6 @@
 <?php
 $viewDir = '/views/';
+$partialDir = '/views/partials/';
 $logDir = '/logs/';
 $route = $_SERVER['REQUEST_URI'];
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
@@ -43,8 +44,33 @@ switch ($route) {
         require __DIR__ . $viewDir . 'home.php';
         break;
 
-    case '/about':
-        require __DIR__ . $viewDir . 'about.php';
+    case '/art':
+        require __DIR__ . $viewDir . 'art.php';
+        break;
+
+    case '/dev':
+        require __DIR__ . $viewDir . 'dev.php';
+        break;
+
+    case '/trading':
+        require __DIR__ . $viewDir . 'trading.php';
+        break;
+
+    case '/ideas':
+        require __DIR__ . $viewDir . 'ideas.php';
+        break;
+
+    /* htmx */
+    case '/facts':
+        require __DIR__ . $partialDir . 'facts.php';
+        break;
+
+    case '/jokes':
+        require __DIR__ . $partialDir . 'jokes.php';
+        break;
+
+    case '/quotes':
+        require __DIR__ . $partialDir . 'quotes.php';
         break;
 
     case '/htmx':

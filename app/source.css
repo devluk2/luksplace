@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+nav ul {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: start;
+  grid-gap: 1rem;
+}
+
+#images {
+  /* Prevent vertical gaps */
+  line-height: 0;
+  column-gap: 0.5rem;
+}
+
+#images img {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
+  margin-bottom: 0.5rem;
+}
+
+.jump-to-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  display: none;
+
+  &.enabled {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  #images {
+    column-count: 2;
+  }
+}
