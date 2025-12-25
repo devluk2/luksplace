@@ -11,7 +11,7 @@ if (!isset($content)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luks place</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    <link rel="stylesheet" href="/public/css/style.css?v=1.0">
+    <link rel="stylesheet" href="/public/css/style.css?v=<?= time(); ?>">
     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('scroll', function () {

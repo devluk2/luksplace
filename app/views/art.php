@@ -13,6 +13,26 @@ shuffle($imageFiles);
 
 <div id="images">
     <?php foreach ($imageFiles as $imageFile) : ?>
-        <img src="/public/images/<?= $imageFile; ?>" alt="<?= $imageFile; ?>" loading="lazy">
+        <div class="image-container">
+            <div class="skeleton skeleton-image"></div>
+            <img src="/public/images/<?= $imageFile; ?>" alt="<?= $imageFile; ?>" loading="lazy" onload="handleImageLoad(this)" onerror="handleImageError(this)">
+        </div>
     <?php endforeach; ?>
 </div>
+
+<script>
+function handleImageLoad(img) {
+    const container = img.parentElement;
+    const skeleton = container.querySelector('.skeleton');
+    
+    img.classList.add('loaded');
+    if (skeleton) {
+        skeleton.style.display = 'none';
+    }
+}
+
+function handleImageError(img) {
+    const container = img.parentElement;
+    container.remove();
+}
+</script>
