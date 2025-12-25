@@ -77,6 +77,11 @@ switch ($route) {
         echo '<p>hello</p>';
         break;
 
+    case '/health':
+        http_response_code(200);
+        echo json_encode(['status' => 'ok', 'timestamp' => date('c')]);
+        break;
+
     default:
         http_response_code(404);
         require __DIR__ . $viewDir . '404.php';

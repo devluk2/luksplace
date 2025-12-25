@@ -1,0 +1,34 @@
+# Logs and temporary files
+app/logs/*
+*.log
+
+# Node modules
+node_modules/
+npm-debug.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git files
+.git
+.gitignore
+
+# Docker files (we want these in the image but not duplicated)
+Dockerfile*
+docker-compose.yml
+.dockerignore
+
+# Development database (use mounted volume instead)
+app/database.sqlite

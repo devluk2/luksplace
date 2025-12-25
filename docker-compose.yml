@@ -1,0 +1,58 @@
+services:
+  # Development environment
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:80"
+    volumes:
+      # Mount source code for live development
+      - .:/var/www/html
+      # Persist logs
+      - ./app/logs:/var/www/html/app/logs
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    profiles:
+      - dev
+
+  # CSS watch service for development
+  css-watch:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm ci && echo 'Starting watch...' && npm run dev"
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev
+
+  # Production environment
+  app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      # Only persist logs and database in production
+      - ./app/logs:/var/www/html/app/logs
+      - ./app/database.sqlite:/var/www/html/app/database.sqlite
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    profiles:
+      - prod

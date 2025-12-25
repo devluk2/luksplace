@@ -1,40 +1,39 @@
-## PHP no framework HTMX example
+## Docker Setup (Recommended)
 
-This is a simple example of using HTMX with PHP and no framework. It uses the [HTMX](https://htmx.org/) library to make AJAX requests and update the page with HTML over the wire. It has some basic error handling and exception handling.
-We can also parse the HX-request header and render content without template. See `register_shutdown_function()`. In the `/about` page I also included an example of how one can work with a SQLite database. 
+The easiest way to run this project is using Docker. See [DOCKER.md](DOCKER.md) for detailed instructions.
 
-I'm also using TailwindCSS, download the CLI (it is not checked in here), place it in `/project` and run it in watch mode with this command:
+### Quick Start with Docker
+
+1. **Install Docker and Docker Compose** (if not already installed)
+
+2. **Start development environment**:
+   ```bash
+   make dev
+   # or
+   ./docker.sh dev
+   ```
+
+3. **Visit your site**: http://localhost:8080
+
+### Docker Commands
+
+Using Makefile:
 ```bash
-./tailwind -i ./app/source.css -o ./public/css/style.css --watch
+make dev      # Start development environment
+make prod     # Start production environment  
+make stop     # Stop all containers
+make logs     # View logs
+make clean    # Clean up resources
+make shell    # Open container shell
 ```
 
-I'm running this locally on my mac by using https://www.mamp.info/en/mamp/mac/ with a nginx controller that is routing like so:
-```nginx
-	server {
-		listen 8999;
-		server_name simple.local;
-
-		root  "/Applications/MAMP/htdocs/project";
-
-		location / {
-			try_files $uri /app/index.php?$query_string;
-		}
-
-		location ~ ^/(public/)?.*\.(css|js)$ {
-			try_files $uri =404;
-			autoindex on;
-		}
-
-		location ~ \.php$ {
-			try_files        $uri =404;
-			fastcgi_pass     unix:/Applications/MAMP/Library/logs/fastcgi/nginxFastCGI.sock;
-			fastcgi_param    SCRIPT_FILENAME $document_root$fastcgi_script_name;
-			include          fastcgi_params;
-		}
-
-		location ~ /\. {
-			deny all;
-		}
-	}
+Using the script:
+```bash
+./docker.sh dev    # Development mode
+./docker.sh prod   # Production mode
+./docker.sh stop   # Stop containers
 ```
+
+## Local Development (Alternative)
+
 Apache/httpd or other web servers should also work. Have fun!

@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./app/source.css -o ./public/css/style.css --watch"
+    "dev": "npx tailwindcss -i ./app/source.css -o ./public/css/style.css --watch",
+    "build": "npx tailwindcss -i ./app/source.css -o ./public/css/style.css --minify"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
 }
