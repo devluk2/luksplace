@@ -1,6 +1,6 @@
 # Makefile for luksplace.com Docker management
 
-.PHONY: help dev dev-bg prod stop restart logs clean shell build-dev build-prod
+.PHONY: help dev dev-bg prod stop stop-dev stop-prod restart logs clean shell build-dev build-prod
 
 help: ## Show this help message
 	@echo "Docker management for luksplace.com"
@@ -27,7 +27,15 @@ prod: ## Start production environment
 
 stop: ## Stop all containers
 	@echo "🛑 Stopping all containers..."
-	docker compose down
+	docker compose --profile dev --profile prod down
+
+stop-dev: ## Stop development containers only
+	@echo "🛑 Stopping development containers..."
+	docker compose --profile dev down
+
+stop-prod: ## Stop production containers only
+	@echo "🛑 Stopping production containers..."
+	docker compose --profile prod down
 
 restart: ## Restart development environment
 	@echo "🔄 Restarting development environment..."
